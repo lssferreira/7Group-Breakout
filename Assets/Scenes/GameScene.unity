@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minY: -6
-  maxVelocity: 7
+  maxVelocity: 5
   initialBallSpeed: {x: 0, y: -10}
 --- !u!1 &519420028
 GameObject:

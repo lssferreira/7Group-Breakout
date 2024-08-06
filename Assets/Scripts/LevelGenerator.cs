@@ -41,8 +41,24 @@ public class LevelGenerator : MonoBehaviour
                 // Define a cor do tijolo com base na posição vertical
                 SpriteRenderer brickRenderer = newBrick.GetComponent<SpriteRenderer>();
                 brickRenderer.color = CalculateBrickColor(y);
+
+                Debug.Log($"Brick at ({x}, {y}) color: {brickRenderer.color}");
             }
         }
+    }
+
+    /// <summary>
+    /// Calcula a cor do tijolo com base na posição vertical na grade.
+    /// </summary>
+    /// <param name="y">Posição y na grade.</param>
+    /// <returns>A cor calculada do tijolo.</returns>
+    private Color CalculateBrickColor(int y)
+    {
+        float colorPosition = (float)y / (gridSize.y - 1);
+
+        Debug.Log($"colorPosition for y={y}: {colorPosition}"); // Debug: Log color position
+
+        return brickGradient.Evaluate(colorPosition);
     }
 
     /// <summary>
@@ -55,17 +71,8 @@ public class LevelGenerator : MonoBehaviour
     {
         float posX = ((gridSize.x - 1) * 0.5f - x) * gridOffset.x;
         float posY = y * gridOffset.y;
+
         return transform.position + new Vector3(posX, posY, 0);
     }
 
-    /// <summary>
-    /// Calcula a cor do tijolo com base na posição vertical na grade.
-    /// </summary>
-    /// <param name="y">Posição y na grade.</param>
-    /// <returns>A cor calculada do tijolo.</returns>
-    private Color CalculateBrickColor(int y)
-    {
-        float colorPosition = (float)y / (gridSize.y - 1);
-        return brickGradient.Evaluate(colorPosition);
-    }
 }
