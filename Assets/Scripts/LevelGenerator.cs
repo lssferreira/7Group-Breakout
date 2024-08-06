@@ -14,6 +14,10 @@ public class LevelGenerator : MonoBehaviour
     // Gradiente de cores a ser aplicado aos tijolos com base na posição vertical.
     [SerializeField] private Gradient brickGradient;
 
+    // Probabilidade de spawn dos tijolos, variando de 0 a 1.
+    [SerializeField] private float spawnProbability = 0.5f;
+
+
     /// <summary>
     /// Método chamado ao inicializar o script. Gera a grade de tijolos.
     /// </summary>
@@ -31,20 +35,71 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 0; y < gridSize.y; y++)
             {
-                // Instancia o tijolo
-                GameObject newBrick = Instantiate(brickPrefab, transform);
-                
-                // Calcula a posição do tijolo
-                Vector3 brickPosition = CalculateBrickPosition(x, y);
-                newBrick.transform.position = brickPosition;
+                if (Random.value > spawnProbability)
+                    continue;
 
-                // Define a cor do tijolo com base na posição vertical
-                SpriteRenderer brickRenderer = newBrick.GetComponent<SpriteRenderer>();
-                brickRenderer.color = CalculateBrickColor(y);
+                // Cria o tijolo e define sua posição
+                GameObject newBrick = CreateBrick(x, y);
 
-                Debug.Log($"Brick at ({x}, {y}) color: {brickRenderer.color}");
+                // Define a cor do tijolo
+                SetBrickColor(newBrick, y);
+
+                // Define o tamanho do tijolo apenas no eixo X
+                SetBrickSize(newBrick, x, y);
+
+                Debug.Log($"Brick at ({x}, {y}) color: {newBrick.GetComponent<SpriteRenderer>().color} size: {newBrick.transform.localScale}");
             }
         }
+    }
+
+    /// <summary>
+    /// Cria o tijolo e define sua posição.
+    /// </summary>
+    private GameObject CreateBrick(int x, int y)
+    {
+        // Instancia o tijolo
+        GameObject newBrick = Instantiate(brickPrefab, transform);
+
+        // Calcula a posição do tijolo
+        Vector3 brickPosition = CalculateBrickPosition(x, y);
+        newBrick.transform.position = brickPosition;
+
+        return newBrick;
+    }
+
+    /// <summary>
+    /// Define a cor do tijolo com base na posição vertical.
+    /// </summary>
+    private void SetBrickColor(GameObject brick, int y)
+    {
+        SpriteRenderer brickRenderer = brick.GetComponent<SpriteRenderer>();
+        brickRenderer.color = CalculateBrickColor(y);
+    }
+
+    /// <summary>
+    /// Define o tamanho do tijolo apenas no eixo X.
+    /// </summary>
+    private void SetBrickSize(GameObject brick, int x, int y)
+    {
+        // Tamanhos dos tijolos
+        float originalSizeX = 1.0f; // Tamanho original em X
+        float halfSizeX = originalSizeX * 0.5f; // Metade do tamanho original em X
+
+        // Obtenha a escala atual do tijolo
+        Vector3 brickScale = brick.transform.localScale;
+
+        // Alterna o tamanho do tijolo apenas no eixo X
+        if ((x + y) % 2 == 0)
+        {
+            brickScale.x = originalSizeX; // Tamanho original em X
+        }
+        else
+        {
+            brickScale.x = halfSizeX; // Metade do tamanho original em X
+        }
+
+        // Aplique a nova escala ao tijolo
+        brick.transform.localScale = brickScale;
     }
 
     /// <summary>
