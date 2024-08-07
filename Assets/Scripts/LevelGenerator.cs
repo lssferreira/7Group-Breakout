@@ -18,17 +18,13 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float spawnProbability = 0.5f;
 
 
-    /// <summary>
-    /// Método chamado ao inicializar o script. Gera a grade de tijolos.
-    /// </summary>
+    // Método chamado ao inicializar o script. Gera a grade de tijolos.
     private void Awake()
     {
         GenerateLevel();
     }
 
-    /// <summary>
-    /// Gera a grade de tijolos com base no tamanho e deslocamento definidos.
-    /// </summary>
+    // Gera a grade de tijolos com base no tamanho e deslocamento definidos.
     private void GenerateLevel()
     {
         for (int x = 0; x < gridSize.x; x++)
@@ -52,9 +48,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Cria o tijolo e define sua posição.
-    /// </summary>
+    // Cria o tijolo e define sua posição.
     private GameObject CreateBrick(int x, int y)
     {
         // Instancia o tijolo
@@ -67,18 +61,14 @@ public class LevelGenerator : MonoBehaviour
         return newBrick;
     }
 
-    /// <summary>
-    /// Define a cor do tijolo com base na posição vertical.
-    /// </summary>
+    // Define a cor do tijolo com base na posição vertical.
     private void SetBrickColor(GameObject brick, int y)
     {
         SpriteRenderer brickRenderer = brick.GetComponent<SpriteRenderer>();
         brickRenderer.color = CalculateBrickColor(y);
     }
 
-    /// <summary>
-    /// Define o tamanho do tijolo apenas no eixo X.
-    /// </summary>
+    // Define o tamanho do tijolo apenas no eixo X.
     private void SetBrickSize(GameObject brick, int x, int y)
     {
         // Tamanhos dos tijolos
@@ -102,11 +92,7 @@ public class LevelGenerator : MonoBehaviour
         brick.transform.localScale = brickScale;
     }
 
-    /// <summary>
-    /// Calcula a cor do tijolo com base na posição vertical na grade.
-    /// </summary>
-    /// <param name="y">Posição y na grade.</param>
-    /// <returns>A cor calculada do tijolo.</returns>
+    // Calcula a cor do tijolo com base na posição vertical na grade.
     private Color CalculateBrickColor(int y)
     {
         float colorPosition = (float)y / (gridSize.y - 1);
@@ -116,12 +102,7 @@ public class LevelGenerator : MonoBehaviour
         return brickGradient.Evaluate(colorPosition);
     }
 
-    /// <summary>
-    /// Calcula a posição do tijolo na grade.
-    /// </summary>
-    /// <param name="x">Posição x na grade.</param>
-    /// <param name="y">Posição y na grade.</param>
-    /// <returns>A posição do tijolo em coordenadas do mundo.</returns>
+    // Calcula a posição do tijolo na grade.
     private Vector3 CalculateBrickPosition(int x, int y)
     {
         float posX = ((gridSize.x - 1) * 0.5f - x) * gridOffset.x;
