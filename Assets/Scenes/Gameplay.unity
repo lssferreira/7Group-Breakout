@@ -151,8 +151,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f3da3d5a580bd499e2b4c9daf6638d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 5, y: 9}
-  gridOffset: {x: 1, y: 0.4}
+  levels:
+  - gridSize: {x: 5, y: 5}
+    gridOffset: {x: 1, y: 0.5}
+    spawnProbability: 100  
+  - gridSize: {x: 5, y: 7}
+    gridOffset: {x: 1, y: 0.5}
+    spawnProbability: 75    
+  - gridSize: {x: 5, y: 9}
+    gridOffset: {x: 1, y: 0.5}
+    spawnProbability: 50
   brickPrefab: {fileID: 554826370}
   brickGradient:
     serializedVersion: 2
@@ -184,7 +192,6 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  spawnProbability: 1
 --- !u!4 &382695313
 Transform:
   m_ObjectHideFlags: 0
