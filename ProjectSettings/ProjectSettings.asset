@@ -142,6 +142,7 @@ PlayerSettings:
   bundleVersion: 1.0.2
   preloadedAssets:
   - {fileID: 8914938560188035154, guid: f1945287f480ed84a9b20ad3db0aea6c, type: 2}
+  - {fileID: 11400000, guid: 5ff3643575885104986627e30f743825, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -802,7 +803,7 @@ PlayerSettings:
   embeddedLinuxEnableGamepadInput: 1
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
-  apiCompatibilityLevel: 6
+  apiCompatibilityLevel: 3
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: a2b9f6ae-4aa5-4565-b498-ac7a04d97529

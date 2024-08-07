@@ -6,14 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TeamMates.unity
-    guid: 72b467518787f00459659e1af8e9b013
+    path: Assets/Scenes/MainMenu.unity
+    guid: 3a052350e0d8d8a40a1854395abbe5ce
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 90c13c31cbfee1943ba6ac1c3f2df8f7
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 3a052350e0d8d8a40a1854395abbe5ce
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: f1945287f480ed84a9b20ad3db0aea6c, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 5ff3643575885104986627e30f743825, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 59287ea4c1288444384b5b7b0e988b31, type: 2}
