@@ -6,13 +6,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public InputManager InputManagerGM { get; private set; }
+
+    [Header("Level Management")]
+    [SerializeField]
+    public int CurrentLevelIndex = 0;
     public LevelGenerator levelGenerator;
 
+    [Header("UI")]
     public TextMeshProUGUI ScoreText;
     public GameObject[] LivesImage;
     public int Score { get; private set; }
     public int Lives { get; private set; }
-    public int TotalBricks { get; private set; }
+
+    [Header("Extra")]
+    [SerializeField] public bool GodMode = false;
+
     public int GetRandomIntNumber() => UnityEngine.Random.Range(0, 100);
 
     private void Awake()
@@ -33,20 +41,25 @@ public class GameManager : MonoBehaviour
         Score = 0;
         Lives = 3;
 
-        levelGenerator.GenerateLevel();
+        LoadNextLevel();
     }
 
     // Avança para o próximo nível, se houver.
     private void LoadNextLevel()
     {
+        Debug.Log($"Iniciando Novo Nivel");
         if (levelGenerator != null)
         {
-            levelGenerator.LoadNextLevel();
+            levelGenerator.LoadNewLevel();
         }
     }
 
     private void OnLevelCompleted()
     {
+        Debug.Log($"Nivel Completado");
+
+        CurrentLevelIndex++;
+
         LoadNextLevel();
     }
 
@@ -65,7 +78,11 @@ public class GameManager : MonoBehaviour
 
     public void RemoveLife()
     {
+        if (GodMode)
+            return;
+
         Lives--;
+        Debug.Log($"Vidas Restantes: {Lives}");
 
         if (Lives < 0)
         {
@@ -75,27 +92,22 @@ public class GameManager : MonoBehaviour
         {
             LivesImage[Lives].SetActive(false);
         }
-        Debug.Log($"Vidas Restantes: {Lives}");
     }
 
     internal void UpdateStateGame()
     {
         AddScore();
+        var brickCount = GetBricksCount();
 
-        TotalBricks--;
-
-        var brickCount = TotalBricks;
-
+        Debug.Log($"Tijolos Restantes: {brickCount}");
         if (brickCount <= 0)
         {
             OnLevelCompleted();
         }
     }
 
-    internal void UpdateNextLevelTotalBricks(int childCount)
+    private int GetBricksCount()
     {
-        TotalBricks = childCount;
-
-        Debug.Log($"Count Bricks: {TotalBricks}");
+        return levelGenerator.transform.childCount;
     }
 }

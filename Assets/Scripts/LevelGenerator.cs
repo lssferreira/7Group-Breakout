@@ -6,16 +6,15 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private LevelData[] levels;  // Array de níveis
     [SerializeField] private GameObject brickPrefab;
     [SerializeField] private Gradient brickGradient;
-    [SerializeField] private int currentLevelIndex = 0;
 
-    private void Start()
+    public void LoadNewLevel()
     {
         GenerateLevel();
     }
 
-    public void GenerateLevel()
+    private void GenerateLevel()
     {
-        LevelData levelData = levels[currentLevelIndex];
+        LevelData levelData = levels[GameManager.Instance.CurrentLevelIndex];
 
         for (int x = 0; x < levelData.gridSize.x; x++)
         {
@@ -29,8 +28,6 @@ public class LevelGenerator : MonoBehaviour
                 SetBrickSize(newBrick, x, y);
             }
         }
-
-        GameManager.Instance.UpdateNextLevelTotalBricks(transform.childCount);
     }
 
     private GameObject CreateBrick(int x, int y, LevelData levelData)
@@ -77,24 +74,4 @@ public class LevelGenerator : MonoBehaviour
         float posY = y * levelData.gridOffset.y;
         return transform.position + new Vector3(posX, posY, 0);
     }
-
-    public void LoadNextLevel()
-    {
-        currentLevelIndex++;
-        if (currentLevelIndex < levels.Length)
-        {
-            GenerateLevel();
-        }
-        else
-        {
-            // Todos os níveis concluídos
-            Debug.Log("Todos os níveis concluídos!");
-        }
-    }
-
-    public bool AreBricksRemaining()
-    {
-        return transform.childCount > 0;
-    }
-
 }
