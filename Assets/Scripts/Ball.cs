@@ -5,10 +5,10 @@ public class Ball : MonoBehaviour
 {
     public static Ball Instance { get; private set; }
 
-    [SerializeField] private float minY = -6f;
     [SerializeField] private float maxVelocity = 8f;
     [SerializeField] private Vector2 initialBallSpeed = Vector2.down * 10f;
-    [SerializeField] private Vector3 initialPosition = new(0, -1.65f,0);
+    [SerializeField] private Vector3 initialPosition = new(0, -1.65f, 0);
+    [SerializeField] private float maxBounceAngle = 45f; //TODO
 
     private Rigidbody2D _rigidbody;
 
@@ -34,7 +34,6 @@ public class Ball : MonoBehaviour
     // Verifica se a bola saiu dos limites e limita a velocidade da bola.
     private void Update()
     {
-        CheckBallOutOfBounds();
         ClampBallSpeed();
     }
 
@@ -45,6 +44,13 @@ public class Ball : MonoBehaviour
         {
             HandleBrickCollision(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            GameManager.Instance.RemoveLife();
+            ResetBall();
+        }
+
     }
 
     // Inicializa a velocidade da bola.
@@ -52,16 +58,6 @@ public class Ball : MonoBehaviour
     {
         _rigidbody.velocity = initialBallSpeed;
         transform.position = initialPosition;
-    }
-
-    // Verifica se a bola saiu dos limites e reinicia o jogo se necessário.
-    private void CheckBallOutOfBounds()
-    {
-        if (transform.position.y < minY)
-        {
-            GameManager.Instance.RemoveLife();
-            ResetBall();
-        }
     }
 
     // Limita a velocidade da bola ao valor máximo permitido.
