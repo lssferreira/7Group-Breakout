@@ -12,7 +12,7 @@ public class LevelGenerator : MonoBehaviour
         GenerateLevel();
     }
 
-    private void GenerateLevel()
+    public void GenerateLevel()
     {
         LevelData levelData = levels[currentLevelIndex];
 
