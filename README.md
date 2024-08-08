@@ -1,8 +1,10 @@
-# Breakout - 7Group
+# Breakout - 7Group 👾
 
 ## Descrição do Projeto
 
 Este projeto é uma recriação do clássico jogo Arkanoid/Breakout, desenvolvido como parte do Projeto Integrador VI-A da Universidade De Caxias do Sul pelo Grupo 7. No jogo, o jogador controla uma barra para rebater uma bola e destruir blocos. O objetivo é quebrar todos os blocos em cada nível sem deixar a bola cair.
+
+![Demonstração do Jogo](Assets/MaterialAux/demo.gif)
 
 ## Tecnologias Utilizadas
 
