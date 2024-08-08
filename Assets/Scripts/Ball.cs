@@ -3,11 +3,26 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public static Ball Instance { get; private set; }
+
     [SerializeField] private float minY = -6f;
     [SerializeField] private float maxVelocity = 8f;
     [SerializeField] private Vector2 initialBallSpeed = Vector2.down * 10f;
+    [SerializeField] private Vector3 initialPosition = new(0, -1.65f,0);
 
     private Rigidbody2D _rigidbody;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Inicializa o Rigidbody2D e lança a bola.
     private void Start()
@@ -36,6 +51,7 @@ public class Ball : MonoBehaviour
     private void LaunchBall()
     {
         _rigidbody.velocity = initialBallSpeed;
+        transform.position = initialPosition;
     }
 
     // Verifica se a bola saiu dos limites e reinicia o jogo se necessário.
@@ -44,7 +60,7 @@ public class Ball : MonoBehaviour
         if (transform.position.y < minY)
         {
             GameManager.Instance.RemoveLife();
-            ResetGame();
+            ResetBall();
         }
     }
 
@@ -60,7 +76,7 @@ public class Ball : MonoBehaviour
     // Lida com a colisão da bola com um tijolo.
     private void HandleBrickCollision(GameObject brick)
     {
-       
+
         Debug.Log(brick.name);
         Destroy(brick);
 
@@ -68,9 +84,9 @@ public class Ball : MonoBehaviour
     }
 
     // Reinicia a posição e velocidade da bola quando ela sai dos limites.
-    private void ResetGame()
+    public void ResetBall()
     {
-        transform.position = Vector3.zero;
+        transform.position = initialPosition;
         LaunchBall();
     }
 }

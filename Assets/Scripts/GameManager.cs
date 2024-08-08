@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -12,14 +13,18 @@ public class GameManager : MonoBehaviour
     public int CurrentLevelIndex = 0;
     public LevelGenerator levelGenerator;
 
+
     [Header("UI")]
-    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI ScoreText;    
+    public TextMeshProUGUI LevelText;
     public GameObject[] LivesImage;
     public int Score { get; private set; }
     public int Lives { get; private set; }
 
     [Header("Extra")]
     [SerializeField] public bool GodMode = false;
+    [SerializeField] public float levelTransitionDelay = 2f;
+    public Ball BallInfo;
 
     public int GetRandomIntNumber() => UnityEngine.Random.Range(0, 100);
 
@@ -38,6 +43,11 @@ public class GameManager : MonoBehaviour
             levelGenerator = FindObjectOfType<LevelGenerator>();
         }
 
+        if (BallInfo == null)
+        {
+            BallInfo = FindObjectOfType<Ball>();
+        }
+
         Score = 0;
         Lives = 3;
 
@@ -51,7 +61,13 @@ public class GameManager : MonoBehaviour
         if (levelGenerator != null)
         {
             levelGenerator.LoadNewLevel();
+            UpdateUi();
         }
+    }
+
+    private void UpdateUi()
+    {
+        LevelText.text = $"Nível {CurrentLevelIndex + 1}";
     }
 
     private void OnLevelCompleted()
@@ -61,6 +77,7 @@ public class GameManager : MonoBehaviour
         CurrentLevelIndex++;
 
         LoadNextLevel();
+        BallInfo.ResetBall();
     }
 
     private void AddScore(int amount)
@@ -108,6 +125,6 @@ public class GameManager : MonoBehaviour
 
     private int GetBricksCount()
     {
-        return levelGenerator.transform.childCount;
+        return levelGenerator.transform.childCount - 1;
     }
 }

@@ -38,7 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         // Movimentar o jogador
-        float moveDirection = horizontalInput * Time.deltaTime * moveSpeed;
+        float moveDirection = horizontalInput * moveSpeed * Time.deltaTime;
         transform.Translate(moveDirection, 0, 0);
 
         // Limitar a posição do jogador dentro da tela
