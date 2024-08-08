@@ -267,7 +267,6 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  currentLevelIndex: 0
 --- !u!4 &382695313
 Transform:
   m_ObjectHideFlags: 0
@@ -923,12 +922,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef70075d1ea92444835023441e5cd6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 0}
+  CurrentLevelIndex: 0
+  levelGenerator: {fileID: 382695312}
   ScoreText: {fileID: 1308686890}
   LivesImage:
   - {fileID: 1546006773}
   - {fileID: 1645346837}
   - {fileID: 18860486}
+  GodMode: 1
 --- !u!4 &1000730516
 Transform:
   m_ObjectHideFlags: 0
