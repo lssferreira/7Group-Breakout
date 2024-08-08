@@ -60,9 +60,11 @@ public class Ball : MonoBehaviour
     // Lida com a colisão da bola com um tijolo.
     private void HandleBrickCollision(GameObject brick)
     {
-        GameManager.Instance.AddScore();
+       
         Debug.Log(brick.name);
         Destroy(brick);
+
+        GameManager.Instance.UpdateStateGame();
     }
 
     // Reinicia a posição e velocidade da bola quando ela sai dos limites.

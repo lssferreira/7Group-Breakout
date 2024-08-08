@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -28,6 +29,8 @@ public class LevelGenerator : MonoBehaviour
                 SetBrickSize(newBrick, x, y);
             }
         }
+
+        GameManager.Instance.UpdateNextLevelTotalBricks(transform.childCount);
     }
 
     private GameObject CreateBrick(int x, int y, LevelData levelData)
@@ -80,11 +83,6 @@ public class LevelGenerator : MonoBehaviour
         currentLevelIndex++;
         if (currentLevelIndex < levels.Length)
         {
-            // Limpar os tijolos existentes
-            foreach (Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
             GenerateLevel();
         }
         else
@@ -93,4 +91,10 @@ public class LevelGenerator : MonoBehaviour
             Debug.Log("Todos os níveis concluídos!");
         }
     }
+
+    public bool AreBricksRemaining()
+    {
+        return transform.childCount > 0;
+    }
+
 }

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] LivesImage;
     public int Score { get; private set; }
     public int Lives { get; private set; }
-    public int GetRandomIntNumber() => Random.Range(0, 100);
+    public int TotalBricks { get; private set; }
+    public int GetRandomIntNumber() => UnityEngine.Random.Range(0, 100);
 
     private void Awake()
     {
@@ -32,16 +34,20 @@ public class GameManager : MonoBehaviour
         Lives = 3;
 
         levelGenerator.GenerateLevel();
-        levelGenerator.GenerateLevel();
     }
 
     // Avança para o próximo nível, se houver.
-    public void LoadNextLevel()
+    private void LoadNextLevel()
     {
         if (levelGenerator != null)
         {
             levelGenerator.LoadNextLevel();
         }
+    }
+
+    private void OnLevelCompleted()
+    {
+        LoadNextLevel();
     }
 
     private void AddScore(int amount)
@@ -51,7 +57,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Score Atual: {Score}");
     }
 
-    public void AddScore()
+    private void AddScore()
     {
         // TODO: Alterar para pegar o valor do bloco
         AddScore(10);
@@ -72,4 +78,24 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Vidas Restantes: {Lives}");
     }
 
+    internal void UpdateStateGame()
+    {
+        AddScore();
+
+        TotalBricks--;
+
+        var brickCount = TotalBricks;
+
+        if (brickCount <= 0)
+        {
+            OnLevelCompleted();
+        }
+    }
+
+    internal void UpdateNextLevelTotalBricks(int childCount)
+    {
+        TotalBricks = childCount;
+
+        Debug.Log($"Count Bricks: {TotalBricks}");
+    }
 }
