@@ -8,7 +8,6 @@ public class Ball : MonoBehaviour
     [SerializeField] private float maxVelocity = 8f;
     [SerializeField] private Vector2 initialBallSpeed = Vector2.down * 10f;
     [SerializeField] private Vector3 initialPosition = new(0, -1.65f, 0);
-    [SerializeField] private float maxBounceAngle = 45f; //TODO
     private AudioSource Sound;
 
     private Rigidbody2D _rigidbody;

@@ -38,6 +38,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void GoToGameplayScene()
     {
+        Handheld.Vibrate();
         SceneManager.LoadScene("Gameplay");
     }
 

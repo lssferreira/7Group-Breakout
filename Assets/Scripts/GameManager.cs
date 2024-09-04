@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Extra")]
     [SerializeField] public bool GodMode = false;
-    [SerializeField] public float levelTransitionDelay = 2f;
+
     public Ball BallInfo;
 
     private AudioSource Sound;

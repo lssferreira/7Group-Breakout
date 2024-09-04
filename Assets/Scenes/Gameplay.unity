@@ -1202,7 +1202,7 @@ MonoBehaviour:
   - {fileID: 1546006773}
   - {fileID: 1645346837}
   - {fileID: 18860486}
-  GodMode: 0
+  GodMode: 1
   levelTransitionDelay: 2
   BallInfo: {fileID: 414643883}
 --- !u!4 &1000730516
