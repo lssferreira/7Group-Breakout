@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -15,7 +13,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("UI")]
-    public TextMeshProUGUI ScoreText;    
+    public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI LevelText;
     public GameObject[] LivesImage;
     public int Score { get; private set; }
@@ -26,12 +24,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float levelTransitionDelay = 2f;
     public Ball BallInfo;
 
+    private AudioSource Sound;
+
     public int GetRandomIntNumber() => UnityEngine.Random.Range(0, 100);
 
     private void Awake()
     {
         if (Instance != null) Destroy(this.gameObject);
         Instance = this;
+
+        Sound = GetComponent<AudioSource>();
 
         InputManagerGM = new InputManager();
     }
@@ -58,8 +60,15 @@ public class GameManager : MonoBehaviour
     private void LoadNextLevel()
     {
         Debug.Log($"Iniciando Novo Nivel");
+        Handheld.Vibrate();
+
         if (levelGenerator != null)
         {
+            if (CurrentLevelIndex != 0)
+            {
+                Sound.Play();
+            }
+
             levelGenerator.LoadNewLevel();
             UpdateUi();
         }

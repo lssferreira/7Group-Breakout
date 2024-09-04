@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private Vector2 initialBallSpeed = Vector2.down * 10f;
     [SerializeField] private Vector3 initialPosition = new(0, -1.65f, 0);
     [SerializeField] private float maxBounceAngle = 45f; //TODO
+    private AudioSource Sound;
 
     private Rigidbody2D _rigidbody;
 
@@ -17,6 +18,7 @@ public class Ball : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            Sound = GetComponent<AudioSource>();
         }
         else
         {
@@ -42,6 +44,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
+            Sound.Play();
             HandleBrickCollision(collision.gameObject);
         }
 
@@ -72,6 +75,7 @@ public class Ball : MonoBehaviour
     // Lida com a colisão da bola com um tijolo.
     private void HandleBrickCollision(GameObject brick)
     {
+       
 
         Debug.Log(brick.name);
         Destroy(brick);

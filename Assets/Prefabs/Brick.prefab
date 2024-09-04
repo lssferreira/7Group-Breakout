@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1332937692325149332}
   - component: {fileID: 2128192229139719564}
-  - component: {fileID: 495307058846256300}
+  - component: {fileID: 1890434973281593708}
   m_Layer: 0
   m_Name: Brick
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &495307058846256300
-BoxCollider2D:
+--- !u!60 &1890434973281593708
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -127,6 +127,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.0027691987, y: 0.6114902}
+      - {x: -0.5148655, y: 0.53902113}
+      - {x: -0.52880335, y: -0.00078614615}
+      - {x: -0.51672375, y: -0.5613212}
+      - {x: 0.004694743, y: -0.59758437}
+      - {x: 0.5185819, y: -0.54459697}
+      - {x: 0.52878684, y: -0.0007909136}
+      - {x: 0.52044016, y: 0.5724697}
+  m_UseDelaunayMesh: 0
