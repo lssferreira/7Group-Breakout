@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -7,9 +6,29 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject brickPrefab;
     [SerializeField] private Gradient brickGradient;
 
+    private float minX, maxX, minY, maxY;
+
     public void LoadNewLevel()
     {
+        CalculateVisibleBounds();
         GenerateLevel();
+    }
+
+    private void CalculateVisibleBounds()
+    {
+        Camera camera = Camera.main;
+        if (camera == null) return;
+
+        // Calcula os limites da tela visível com base na posição da câmera e no tamanho da viewport
+        float camHalfHeight = camera.orthographicSize;
+        float camHalfWidth = camHalfHeight * camera.aspect;
+
+        Vector3 camPosition = camera.transform.position;
+
+        minX = camPosition.x - camHalfWidth;
+        maxX = camPosition.x + camHalfWidth;
+        minY = camPosition.y - camHalfHeight;
+        maxY = camPosition.y + camHalfHeight;
     }
 
     private void GenerateLevel()
@@ -24,8 +43,17 @@ public class LevelGenerator : MonoBehaviour
                     continue;
 
                 GameObject newBrick = CreateBrick(x, y, levelData);
-                SetBrickColor(newBrick, y, levelData.gridSize.y);
-                SetBrickSize(newBrick, x, y);
+
+                // Verifica se o bloco está dentro dos limites visíveis
+                if (IsBrickWithinBounds(newBrick.transform.position))
+                {
+                    SetBrickColor(newBrick, y, levelData.gridSize.y);
+                    SetBrickSize(newBrick, x, y);
+                }
+                else
+                {
+                    Destroy(newBrick); // Remove o bloco se estiver fora dos limites
+                }
             }
         }
     }
@@ -73,5 +101,17 @@ public class LevelGenerator : MonoBehaviour
         float posX = ((levelData.gridSize.x - 1) * 0.5f - x) * levelData.gridOffset.x;
         float posY = y * levelData.gridOffset.y;
         return transform.position + new Vector3(posX, posY, 0);
+    }
+
+    private bool IsBrickWithinBounds(Vector3 position)
+    {
+        // Verifica se a posição do bloco está dentro dos limites visíveis
+        float brickWidth = brickPrefab.GetComponent<SpriteRenderer>().bounds.extents.x;
+        float brickHeight = brickPrefab.GetComponent<SpriteRenderer>().bounds.extents.y;
+
+        return (position.x - brickWidth >= minX &&
+                position.x + brickWidth <= maxX &&
+                position.y - brickHeight >= minY &&
+                position.y + brickHeight <= maxY);
     }
 }

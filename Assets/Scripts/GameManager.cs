@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     private AudioSource Sound;
 
+    public BorderPositioner borderPosition;
+
     public int GetRandomIntNumber() => UnityEngine.Random.Range(0, 100);
 
     private void Awake()
@@ -40,6 +42,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
+        borderPosition.PositionBorders();
+
         if (levelGenerator == null)
         {
             levelGenerator = FindObjectOfType<LevelGenerator>();

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\LevelData.cs" />
     <Compile Include="Assets\Scripts\LevelGenerator.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\BorderPosition.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\Input\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Input\InputManager.cs" />
