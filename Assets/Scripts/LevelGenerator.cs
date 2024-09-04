@@ -33,7 +33,16 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateLevel()
     {
-        LevelData levelData = levels[GameManager.Instance.CurrentLevelIndex];
+        LevelData levelData;
+        try
+        {
+            levelData = levels[GameManager.Instance.CurrentLevelIndex];
+        }
+        catch (System.Exception)
+        {
+            Debug.LogError("Índice do nível está fora dos limites do array.");
+            return;
+        }
 
         for (int x = 0; x < levelData.gridSize.x; x++)
         {
