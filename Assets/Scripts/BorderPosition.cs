@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BorderPositioner : MonoBehaviour
 {
-    public GameObject leftBorder;   
-    public GameObject rightBorder;  
-    public GameObject topBorder;    
-    public GameObject bottomBorder; 
+    public GameObject leftBorder;
+    public GameObject rightBorder;
+    public GameObject topBorder;
+    public GameObject bottomBorder;
 
     public void PositionBorders()
     {

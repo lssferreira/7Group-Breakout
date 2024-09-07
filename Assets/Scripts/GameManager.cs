@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private const int DefaultAmountScore = 10;
+    private const int DefaultAmountLives = 3;
+
     public static GameManager Instance;
     public InputManager InputManagerGM { get; private set; }
 
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour
         }
 
         Score = 0;
-        Lives = 3;
+        Lives = DefaultAmountLives;
 
         LoadNextLevel();
     }
@@ -103,8 +106,7 @@ public class GameManager : MonoBehaviour
 
     private void AddScore()
     {
-        // TODO: Alterar para pegar o valor do bloco
-        AddScore(10);
+        AddScore(DefaultAmountScore);
     }
 
     public void RemoveLife()

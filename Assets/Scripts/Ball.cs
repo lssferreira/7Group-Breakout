@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -74,8 +73,6 @@ public class Ball : MonoBehaviour
     // Lida com a colisão da bola com um tijolo.
     private void HandleBrickCollision(GameObject brick)
     {
-       
-
         Debug.Log(brick.name);
         Destroy(brick);
 
