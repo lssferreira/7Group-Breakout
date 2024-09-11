@@ -1293,7 +1293,7 @@ MonoBehaviour:
   - {fileID: 1546006773}
   - {fileID: 1645346837}
   - {fileID: 18860486}
-  GodMode: 1
+  GodMode: 0
   BallInfo: {fileID: 414643883}
   borderPosition: {fileID: 429825098}
 --- !u!4 &1000730516
